@@ -1,5 +1,5 @@
 # ProtogenOS
-C++ and Assembly System (protogen uwu)
+C and Assembly System (protogen uwu)
 
 Installation for Windows: 
 ```
