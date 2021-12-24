@@ -1,7 +1,8 @@
 # ProtogenOS
 C++ and Assembly System (protogen uwu)
 
-```Installation for Windows: 
+Installation for Windows: 
+```
 -------------
 git Edouard127/ProtogenOS
 cd ./ProtogenOS
