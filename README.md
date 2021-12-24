@@ -1,7 +1,7 @@
 # ProtogenOS
 C++ and Assembly System (protogen uwu)
 
-Installation for Windows: 
+```Installation for Windows: 
 -------------
 git Edouard127/ProtogenOS
 cd ./ProtogenOS
@@ -12,4 +12,4 @@ make bootloader
 cd ../kernel
 make kernel
 make buildimg
-./run2.bat
+./run2.bat```
