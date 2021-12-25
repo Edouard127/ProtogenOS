@@ -95,13 +95,14 @@ PSF1_FONT* finishedFont;
 	void* glyphBuffer;
 	{
 		font->SetPosition(font, sizeof(PSF1_HEADER));
-		SystemTable->BootServices->AllocatePool(EfiLoaderData, glyphBufferSize, &glyphBuffer);
+		SystemTable->BootServices->AllocatePool(EfiLoaderData, glyphBufferSize, (void**)&glyphBuffer);
 		font->Read(font, glyphBuffer, &glyphBufferSize);
-		SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_HEADER), void(**)(&finishedFont));
-		finishedFont->psf1_header = fontHeader;
-		finishedFont->glyphBuffer = glyphBuffer;
-		return finishedFont;
+
 	}
+	SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_FONT), void(**)(&finishedFont));
+	finishedFont->psf1_header = fontHeader;
+	finishedFont->glyphBuffer = glyphBuffer;
+	return finishedFont;
 
 	
 
@@ -196,7 +197,6 @@ EFI_STATUS efi_main (EFI_HANDLE ImageHandle, EFI_SYSTEM_TABLE *SystemTable) {
 	else{
 		Print(L"Font loaded. char size = %d\r\n", newFont->psf1_header->charsize);
 	}
-
 	Framebuffer* newBuffer = InitializeGOP();
 	Print(L"Base: 0x%x\n\rSize: 0x%x\n\rWidth: %d\n\rHeight: %d\n\rPixelsPerScanline: %d\n\r\n\r", 
 	newBuffer->BaseAddress, 
