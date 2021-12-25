@@ -24,8 +24,8 @@ void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour
 
 	unsigned int* pixPtr = (unsigned int*)framebuffer->BaseAddress;
 	char *fontPtr = psf1_font->glyphBuffer + (chr * psf1_font->psf1_Header->charsize);
-	for(unsigned int y = yOff; y < yOff+16; y++) {
-		for(unsigned int x = xOff; x < xOff+8; x++) {
+	for(unsigned long y = yOff; y < yOff+16; y++) {
+		for(unsigned long x = xOff; x < xOff+8; x++) {
 			if((*fontPtr & (0b10000000 >> (x-xOff))) > 0){
 				*(unsigned int*)(pixPtr +x+(y*framebuffer->PixelsPerScanLine)) = colour;
 			}
@@ -34,7 +34,7 @@ void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour
 	}
 }
 
-void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char chr){
+void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char* chr){
     unsigned int x = 0;
 	char* chr = str;
 	while(*chr !=0){
@@ -46,7 +46,8 @@ void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, 
 
 extern void _start(Framebuffer* framebuffer, PSF1_FONT *psf1_font){
     
-	Print(framebuffer, psf1_font, 0xfffffffff, 'Loading ProtOS');
+	Print(framebuffer, psf1_font, 0xffffffff, "Loading ProtOS");
+	//Print(framebuffer, psf1_font, 0xfffffffff, 'Loading ProtOS');
 	return ;
 	
 }
