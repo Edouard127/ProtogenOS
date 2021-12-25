@@ -18,6 +18,10 @@ typedef struct {
 	PSF1_HEADER* psf1_Header;
 	void* glyphBuffer;
 } PSF1_FONT;
+typedef struct {
+	unsigned int X;
+	unsigned int Y;
+} Point;
 
 void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char chr, unsigned int xOff, unsigned int yOff){
 
@@ -34,8 +38,8 @@ void putChar(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour
 	}
 }
 
-void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char* chr){
-    unsigned int x = 0;
+
+void PrintT(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, char* chr){
 	char* chr = str;
 	while(*chr !=0){
 		putChar(framebuffer, psf1_font, colour, *chr, x, 0);
@@ -44,10 +48,9 @@ void Print(Framebuffer* framebuffer, PSF1_FONT* psf1_font, unsigned int colour, 
 	}
 }
 
-extern void _start(Framebuffer* framebuffer, PSF1_FONT *psf1_font){
+void _start(Framebuffer* framebuffer, PSF1_FONT *psf1_font){
     
-	Print(framebuffer, psf1_font, 0xffffffff, "Loading ProtOS");
-	//Print(framebuffer, psf1_font, 0xfffffffff, 'Loading ProtOS');
+	PrintT(framebuffer, psf1_font, 0xffffffff, "Loading ProtOS");
 	return ;
 	
 }
