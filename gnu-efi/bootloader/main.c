@@ -78,7 +78,7 @@ PSF1_FONT* LoadPSF1Font(EFI_FILE* Directory, CHAR16* Path, EFI_HANDLE ImageHandl
 		return NULL;
 	}
 	PSF1_HEADER* fontHeader;
-	SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_HEADER), void(**)(&fontHeader));
+	SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_HEADER), void**(&fontHeader));
 	UINTN size = sizeof(PSF1_HEADER);
 	font->Read(font, &size, fontHeader);
 
@@ -95,11 +95,11 @@ PSF1_FONT* finishedFont;
 	void* glyphBuffer;
 	{
 		font->SetPosition(font, sizeof(PSF1_HEADER));
-		SystemTable->BootServices->AllocatePool(EfiLoaderData, glyphBufferSize, (void**)&glyphBuffer);
+		SystemTable->BootServices->AllocatePool(EfiLoaderData, glyphBufferSize, void**(&glyphBuffer));
 		font->Read(font, glyphBuffer, &glyphBufferSize);
 
 	}
-	SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_FONT), void(**)(&finishedFont));
+	SystemTable->BootServices->AllocatePool(EfiLoaderData, sizeof(PSF1_FONT), void**(&finishedFont));
 	finishedFont->psf1_header = fontHeader;
 	finishedFont->glyphBuffer = glyphBuffer;
 	return finishedFont;
